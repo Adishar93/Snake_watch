@@ -1,6 +1,7 @@
 package com.example.asgamesnake;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 public class MainThread extends Thread{
@@ -9,6 +10,14 @@ public class MainThread extends Thread{
     private GameView mGameView;
     private boolean running;
     public static Canvas canvas;
+
+    long targetFPS=60;
+    long startTime;
+    long timeMillis;
+    long waitTime;
+    long totalTime = 0;
+    int frameCount = 0;
+    long targetTime = 1000 / targetFPS;
 
     public MainThread(SurfaceHolder surfaceHolder,GameView gameView)
     {
@@ -21,6 +30,7 @@ public class MainThread extends Thread{
     @Override
     public void run() {
         while (running) {
+            startTime = System.nanoTime();
             canvas = null;
 
             try {
@@ -38,6 +48,25 @@ public class MainThread extends Thread{
                     }
                 }
             }
+
+            timeMillis = (System.nanoTime() - startTime) / 1000000;
+
+            waitTime = targetTime - timeMillis;
+            try {
+                this.sleep(waitTime);
+            } catch (Exception e) {
+                Log.e("Thread error:","Thread was unable to sleep "+e.toString());
+            }
+
+            totalTime += System.nanoTime() - startTime;
+            frameCount++;
+            if (frameCount == targetFPS)        {
+                long averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
+                frameCount = 0;
+                totalTime = 0;
+                Log.d("Average FPS: ",""+averageFPS);
+            }
+
         }
     }
 

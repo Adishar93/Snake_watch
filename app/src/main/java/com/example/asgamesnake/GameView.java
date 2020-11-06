@@ -1,6 +1,7 @@
 package com.example.asgamesnake;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +10,11 @@ import android.view.SurfaceView;
 import android.view.View;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+
+    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels-40;
+    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels-70;
+    private int zeroPointX=40;
+    private int zeroPointY=70;
 
     private MainThread thread;
     private Paint paint;
@@ -21,7 +27,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         paint=new Paint();
-        snakeSprite=new SnakeSprite(1);
+        snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,1);
     }
 
     @Override
@@ -59,6 +65,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         if (canvas != null) {
             canvas.drawColor(Color.WHITE);
+            paint.setColor(Color.rgb(0, 0, 0));
+            paint.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(zeroPointX,zeroPointY,screenWidth,screenHeight,paint);
 
             snakeSprite.draw(canvas,paint);
         }

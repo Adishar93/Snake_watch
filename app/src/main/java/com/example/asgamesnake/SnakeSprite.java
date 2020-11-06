@@ -8,18 +8,27 @@ import android.graphics.Paint;
 public class SnakeSprite {
     int length;
     int x,y;
-    int height,width;
-    int xVelocity=4;
-    int yVelocity=3;
-    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+    int snakeHeight,snakeWidth;
+    int xVelocity;
+    int yVelocity;
+    private int screenWidth;
+    private int screenHeight;
+    private int zeroPointX;
+    private int zeroPointY;
 
-    public SnakeSprite(int len)
+    public SnakeSprite(int screenWidth,int screenHeight,int zeroPointX,int zeroPointY,int len)
     {
+        this.screenWidth=screenWidth;
+        this.screenHeight=screenHeight;
+        this.zeroPointX=zeroPointX;
+        this.zeroPointY=zeroPointY;
+
         x=50;
-        y=50;
-        height=20;
-        width=20;
+        y=80;
+        snakeHeight=20;
+        snakeWidth=20;
+        xVelocity=6;
+        yVelocity=3;
         length=len;
     }
 
@@ -28,11 +37,11 @@ public class SnakeSprite {
         x=x+xVelocity;
         y=y+yVelocity;
 
-        if(x+width>=screenWidth||x<=0)
+        if(x+snakeWidth>=screenWidth||x<=zeroPointX)
         {
             xVelocity=-xVelocity;
         }
-        if(y+height>=screenHeight||y<=0)
+        if(y+snakeHeight>=screenHeight||y<=zeroPointY)
         {
             yVelocity=-yVelocity;
         }
@@ -41,6 +50,7 @@ public class SnakeSprite {
     public void draw(Canvas canvas, Paint paint)
     {
         paint.setColor(Color.rgb(250, 0, 0));
-        canvas.drawRect(x, y, x+width, y+height, paint);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(x, y, x+snakeWidth, y+snakeHeight, paint);
     }
 }
