@@ -62,22 +62,51 @@ public class SnakeSprite {
             int direction=currentData.getDirection();
 
             //Update snake position
+            int currPosition;
             switch(direction)
             {
                 case SnakeSegmentData.DIRECTION_RIGHT:
-                    currentData.setX(currentData.getX()+velocity);
+                    currPosition=currentData.getX();
+                    if(currPosition+velocity>=screenWidth)
+                    {
+                        currentData.setX(zeroPointX);
+                    }
+                    else {
+                        currentData.setX(currPosition + velocity);
+                    }
                     break;
 
                 case SnakeSegmentData.DIRECTION_LEFT:
-                    currentData.setX(currentData.getX()-velocity);
+                    currPosition=currentData.getX();
+                    if(currPosition-velocity<zeroPointX)
+                    {
+                        currentData.setX(screenWidth-snakeWidth);
+                    }
+                    else
+                    {
+                        currentData.setX(currPosition-velocity);
+                    }
+
                     break;
 
                 case SnakeSegmentData.DIRECTION_UP:
-                    currentData.setX(currentData.getY()-velocity);
+                    currPosition=currentData.getY();
+                    if(currPosition-velocity<zeroPointY)
+                    {
+                        currentData.setY(screenHeight-snakeHeight);
+                    }
+                    else {
+                        currentData.setY(currPosition - velocity);
+                    }
                     break;
 
                 case SnakeSegmentData.DIRECTION_DOWN:
-                    currentData.setX(currentData.getY()+velocity);
+                    currPosition=currentData.getY();
+                    if(currPosition+velocity>=screenHeight)
+                    {
+                        currentData.setY(zeroPointY);
+                    }
+                    currentData.setY(currPosition+velocity);
                     break;
             }
 
