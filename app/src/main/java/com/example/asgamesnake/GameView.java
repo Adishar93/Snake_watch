@@ -11,12 +11,17 @@ import android.view.View;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread thread;
+    private Paint paint;
+    private SnakeSprite snakeSprite;
 
     public GameView(Context context) {
         super(context);
         getHolder().addCallback(this);
         thread=new MainThread(getHolder(),this);
         setFocusable(true);
+
+        paint=new Paint();
+        snakeSprite=new SnakeSprite(1);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-
+        snakeSprite.update();
     }
 
     @Override
@@ -54,9 +59,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         if (canvas != null) {
             canvas.drawColor(Color.WHITE);
-            Paint paint = new Paint();
-            paint.setColor(Color.rgb(250, 0, 0));
-            canvas.drawRect(50, 50, 100, 100, paint);
+
+            snakeSprite.draw(canvas,paint);
         }
+
     }
 }
