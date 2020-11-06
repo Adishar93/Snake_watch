@@ -11,7 +11,7 @@ public class MainThread extends Thread{
     private boolean running;
     public static Canvas canvas;
 
-    long targetFPS=60;
+    long targetFPS=5;
     long startTime;
     long timeMillis;
     long waitTime;

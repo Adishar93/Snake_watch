@@ -27,7 +27,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         paint=new Paint();
-        snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,1);
+        snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,3);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        snakeSprite.update();
+        snakeSprite.update(3);
     }
 
     @Override
