@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -19,6 +20,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
     private Paint paint;
     private SnakeSprite snakeSprite;
+
+    public static final int TOUCH_RIGHT=1;
+    public static final int TOUCH_LEFT=2;
 
     public GameView(Context context) {
         super(context);
@@ -72,5 +76,23 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             snakeSprite.draw(canvas,paint);
         }
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+
+        float x=event.getX();
+        float y=event.getY();
+
+        if(x>180)
+        {
+            snakeSprite.handleTouch(TOUCH_RIGHT);
+        }
+        else
+        {
+            snakeSprite.handleTouch(TOUCH_LEFT);
+        }
+        return super.onTouchEvent(event);
     }
 }

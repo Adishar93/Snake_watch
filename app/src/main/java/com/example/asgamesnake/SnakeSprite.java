@@ -55,6 +55,8 @@ public class SnakeSprite {
         SnakeSegmentData currentData=null;
         SnakeSegmentData previousData=null;
 
+        int tempDirectionValue=99;
+
         for(int i=0;i<length;i++)
         {
 
@@ -106,12 +108,14 @@ public class SnakeSprite {
                     {
                         currentData.setY(zeroPointY);
                     }
-                    currentData.setY(currPosition+velocity);
+                    else {
+                        currentData.setY(currPosition + velocity);
+                    }
                     break;
             }
 
             //Handle direction change in snake
-            int tempDirectionValue=99;
+
             if(previousData!=null)
             {
                 if(currentData.getDirection()!=previousData.getDirection()&&currentData.getDirection()!=tempDirectionValue)
@@ -145,6 +149,55 @@ public class SnakeSprite {
             int xVal=snakeState.get(i).getX();
             int yVal=snakeState.get(i).getY();
             canvas.drawRect(xVal, yVal, xVal+snakeWidth, yVal +snakeHeight, paint);
+        }
+
+    }
+
+    public void handleTouch(int touchDirection)
+    {
+
+        SnakeSegmentData headData=snakeState.get(0);
+        int snakeDirection=headData.getDirection();
+
+        switch(touchDirection)
+        {
+            case GameView.TOUCH_LEFT:
+                switch(snakeDirection)
+                {
+                    case SnakeSegmentData.DIRECTION_RIGHT:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_UP);
+                        break;
+
+                    case SnakeSegmentData.DIRECTION_LEFT:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_DOWN);
+                        break;
+                    case SnakeSegmentData.DIRECTION_UP:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_LEFT);
+                        break;
+                    case SnakeSegmentData.DIRECTION_DOWN:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_RIGHT);
+                        break;
+                }
+                break;
+
+            case GameView.TOUCH_RIGHT:
+                switch(snakeDirection)
+                {
+                    case SnakeSegmentData.DIRECTION_RIGHT:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_DOWN);
+                        break;
+
+                    case SnakeSegmentData.DIRECTION_LEFT:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_UP);
+                        break;
+                    case SnakeSegmentData.DIRECTION_UP:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_RIGHT);
+                        break;
+                    case SnakeSegmentData.DIRECTION_DOWN:
+                        headData.setDirection(SnakeSegmentData.DIRECTION_LEFT);
+                        break;
+                }
+                break;
         }
 
     }
