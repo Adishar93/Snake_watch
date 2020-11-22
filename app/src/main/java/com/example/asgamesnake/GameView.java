@@ -19,6 +19,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread thread;
     private Paint paint;
+    public ScoreText scoreText;
     public SnakeSprite snakeSprite;
     public FoodSprite foodSprite;
 
@@ -34,8 +35,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         paint=new Paint();
+
+        scoreText=new ScoreText();
         snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,1);
-        foodSprite=new FoodSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,snakeSprite);
+        foodSprite=new FoodSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,snakeSprite,scoreText);
 
     }
 
@@ -79,6 +82,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             paint.setStyle(Paint.Style.STROKE);
             canvas.drawRect(zeroPointX,zeroPointY,screenWidth,screenHeight,paint);
 
+            scoreText.draw(canvas,paint);
             foodSprite.draw(canvas,paint);
             snakeSprite.draw(canvas,paint);
 
