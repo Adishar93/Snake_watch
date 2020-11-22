@@ -19,7 +19,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread thread;
     private Paint paint;
-    private SnakeSprite snakeSprite;
+    public SnakeSprite snakeSprite;
+    public FoodSprite foodSprite;
+
+    private long lastTouchTime=0;
 
     public static final int TOUCH_RIGHT=1;
     public static final int TOUCH_LEFT=2;
@@ -31,7 +34,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         paint=new Paint();
-        snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,3);
+        snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,1);
+        foodSprite=new FoodSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,snakeSprite);
+
     }
 
     @Override
@@ -61,7 +66,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        snakeSprite.update(3);
+        snakeSprite.update();
+        foodSprite.update();
     }
 
     @Override
@@ -73,7 +79,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             paint.setStyle(Paint.Style.STROKE);
             canvas.drawRect(zeroPointX,zeroPointY,screenWidth,screenHeight,paint);
 
+            foodSprite.draw(canvas,paint);
             snakeSprite.draw(canvas,paint);
+
         }
 
     }
@@ -82,17 +90,22 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
 
 
-        float x=event.getX();
-        float y=event.getY();
 
-        if(x>180)
-        {
-            snakeSprite.handleTouch(TOUCH_RIGHT);
-        }
-        else
-        {
-            snakeSprite.handleTouch(TOUCH_LEFT);
-        }
+//        if(System.nanoTime()-lastTouchTime>=200*1000000) {
+            float x = event.getX();
+            float y = event.getY();
+
+            if (x > 180) {
+                snakeSprite.handleTouch(TOUCH_RIGHT);
+            } else {
+                snakeSprite.handleTouch(TOUCH_LEFT);
+            }
+            lastTouchTime=System.nanoTime();
+//        }
+
+
         return super.onTouchEvent(event);
     }
+
+
 }

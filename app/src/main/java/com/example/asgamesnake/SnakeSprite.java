@@ -18,6 +18,7 @@ public class SnakeSprite {
     private int zeroPointX;
     private int zeroPointY;
 
+
     public SnakeSprite(int screenWidth,int screenHeight,int zeroPointX,int zeroPointY,int len)
     {
         this.screenWidth=screenWidth;
@@ -41,7 +42,7 @@ public class SnakeSprite {
         }
     }
 
-    public void update(int len)
+    public void update()
     {
         //Code to grow snake's tail
 //        if(len>0) {
@@ -127,6 +128,9 @@ public class SnakeSprite {
             previousData=currentData;
         }
 
+        headX=snakeState.get(0).getX();
+        headY=snakeState.get(0).getY();
+
 
 
 //        if(x+snakeWidth>=screenWidth||x<=zeroPointX)
@@ -153,52 +157,88 @@ public class SnakeSprite {
 
     }
 
-    public void handleTouch(int touchDirection)
-    {
+    public void handleTouch(int touchDirection) {
 
-        SnakeSegmentData headData=snakeState.get(0);
-        int snakeDirection=headData.getDirection();
 
-        switch(touchDirection)
-        {
-            case GameView.TOUCH_LEFT:
-                switch(snakeDirection)
-                {
-                    case SnakeSegmentData.DIRECTION_RIGHT:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_UP);
+            SnakeSegmentData headData = snakeState.get(0);
+
+                int snakeDirection = headData.getDirection();
+
+                switch (touchDirection) {
+                    case GameView.TOUCH_LEFT:
+                        switch (snakeDirection) {
+                            case SnakeSegmentData.DIRECTION_RIGHT:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_UP);
+                                break;
+
+                            case SnakeSegmentData.DIRECTION_LEFT:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_DOWN);
+                                break;
+                            case SnakeSegmentData.DIRECTION_UP:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_LEFT);
+                                break;
+                            case SnakeSegmentData.DIRECTION_DOWN:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_RIGHT);
+                                break;
+                        }
                         break;
 
-                    case SnakeSegmentData.DIRECTION_LEFT:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_DOWN);
-                        break;
-                    case SnakeSegmentData.DIRECTION_UP:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_LEFT);
-                        break;
-                    case SnakeSegmentData.DIRECTION_DOWN:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_RIGHT);
+                    case GameView.TOUCH_RIGHT:
+                        switch (snakeDirection) {
+                            case SnakeSegmentData.DIRECTION_RIGHT:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_DOWN);
+                                break;
+
+                            case SnakeSegmentData.DIRECTION_LEFT:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_UP);
+                                break;
+                            case SnakeSegmentData.DIRECTION_UP:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_RIGHT);
+                                break;
+                            case SnakeSegmentData.DIRECTION_DOWN:
+                                headData.setDirection(SnakeSegmentData.DIRECTION_LEFT);
+                                break;
+                        }
                         break;
                 }
-                break;
 
-            case GameView.TOUCH_RIGHT:
-                switch(snakeDirection)
-                {
-                    case SnakeSegmentData.DIRECTION_RIGHT:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_DOWN);
-                        break;
 
-                    case SnakeSegmentData.DIRECTION_LEFT:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_UP);
-                        break;
-                    case SnakeSegmentData.DIRECTION_UP:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_RIGHT);
-                        break;
-                    case SnakeSegmentData.DIRECTION_DOWN:
-                        headData.setDirection(SnakeSegmentData.DIRECTION_LEFT);
-                        break;
-                }
-                break;
+
+
         }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+        SnakeSegmentData snakeSegmentData=snakeState.get(snakeState.size()-1);
+
+        if(snakeSegmentData.getDirection()==SnakeSegmentData.DIRECTION_UP)
+        {
+            snakeState.add(new SnakeSegmentData(snakeSegmentData.getX(), snakeSegmentData.getY()+snakeHeight,SnakeSegmentData.DIRECTION_UP));
+        }
+        else if(snakeSegmentData.getDirection()==SnakeSegmentData.DIRECTION_DOWN)
+        {
+            snakeState.add(new SnakeSegmentData(snakeSegmentData.getX(), snakeSegmentData.getY()-snakeHeight,SnakeSegmentData.DIRECTION_DOWN));
+        }
+        else if(snakeSegmentData.getDirection()==SnakeSegmentData.DIRECTION_LEFT)
+        {
+            snakeState.add(new SnakeSegmentData(snakeSegmentData.getX()+snakeWidth, snakeSegmentData.getY(),SnakeSegmentData.DIRECTION_LEFT));
+        }
+        else if(snakeSegmentData.getDirection()==SnakeSegmentData.DIRECTION_RIGHT)
+        {
+            snakeState.add(new SnakeSegmentData(snakeSegmentData.getX()-snakeWidth, snakeSegmentData.getY(),SnakeSegmentData.DIRECTION_RIGHT));
+        }
+
+    }
+
+    public int getHeadX() {
+        return headX;
+    }
+
+    public int getHeadY() {
+        return headY;
     }
 }

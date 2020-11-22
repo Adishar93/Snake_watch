@@ -17,7 +17,7 @@ public class MainThread extends Thread{
     long waitTime;
     long totalTime = 0;
     int frameCount = 0;
-    long targetTime = 1000 / targetFPS;
+    public long targetTime = 1000 / targetFPS;
 
     public MainThread(SurfaceHolder surfaceHolder,GameView gameView)
     {
@@ -29,6 +29,7 @@ public class MainThread extends Thread{
 
     @Override
     public void run() {
+        int count=0;
         while (running) {
             startTime = System.nanoTime();
             canvas = null;
@@ -38,6 +39,14 @@ public class MainThread extends Thread{
                 synchronized(mSurfaceHolder) {
                     mGameView.update();
                     mGameView.draw(canvas);
+//                    if(count%2==0) {
+//                        mGameView.snakeSprite.handleTouch(GameView.TOUCH_RIGHT);
+//                    }
+//                    else
+//                    {
+//                        mGameView.snakeSprite.handleTouch(GameView.TOUCH_LEFT);
+//                    }
+//                    count++;
                 }
             } catch (Exception e) {} finally {
                 if (canvas != null) {
