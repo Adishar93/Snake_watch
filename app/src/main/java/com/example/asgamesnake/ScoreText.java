@@ -13,6 +13,7 @@ public class ScoreText {
     long score=0;
     long highScore=0;
     private static String LOCAL_DATA="localData";
+    private int textColor=0;
     SharedPreferences localData;
 
     public ScoreText(Context context)
@@ -20,6 +21,18 @@ public class ScoreText {
         localData = context.getSharedPreferences(LOCAL_DATA, MODE_PRIVATE);
 
         highScore=localData.getLong("high score",0);
+
+        boolean isLightTheme=SettingsSingleton.getInstance().isLightTheme();
+        if(isLightTheme)
+        {
+
+            textColor=Color.BLACK;
+        }
+        else
+        {
+
+            textColor=Color.WHITE;
+        }
 
     }
 
@@ -39,7 +52,7 @@ public class ScoreText {
 
     public void draw(Canvas canvas, Paint paint)
     {
-        paint.setColor(Color.BLACK);
+        paint.setColor(textColor);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(16);
 

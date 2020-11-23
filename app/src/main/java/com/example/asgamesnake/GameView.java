@@ -19,9 +19,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread thread;
     private Paint paint;
-    public ScoreText scoreText;
-    public SnakeSprite snakeSprite;
-    public FoodSprite foodSprite;
+    private ScoreText scoreText;
+    private SnakeSprite snakeSprite;
+    private FoodSprite foodSprite;
+
+    private int canvasColor=0;
+    private int borderColor=0;
 
     private long lastTouchTime=0;
 
@@ -40,6 +43,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,1);
         foodSprite=new FoodSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,snakeSprite,scoreText);
 
+        //Load Theme Settings
+        boolean isLightTheme=SettingsSingleton.getInstance().isLightTheme();
+        if(isLightTheme)
+        {
+            canvasColor=Color.WHITE;
+            borderColor=Color.BLACK;
+        }
+        else
+        {
+            canvasColor=Color.BLACK;
+            borderColor=Color.WHITE;
+        }
     }
 
     @Override
@@ -77,8 +92,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         if (canvas != null) {
-            canvas.drawColor(Color.WHITE);
-            paint.setColor(Color.rgb(0, 0, 0));
+            canvas.drawColor(canvasColor);
+            paint.setColor(borderColor);
             paint.setStyle(Paint.Style.STROKE);
             canvas.drawRect(zeroPointX,zeroPointY,screenWidth,screenHeight,paint);
 
