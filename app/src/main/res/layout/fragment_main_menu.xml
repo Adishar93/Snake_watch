@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenuFragment">
+    <RelativeLayout
+        android:id="@+id/fragmentRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <Button
+        android:id="@+id/bPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        android:textSize="25dp"
+        android:fontFamily="@font/roboto"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="60dp"
+        />
+
+    <Button
+        android:id="@+id/bSettings"
+        android:layout_below="@+id/bPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/roboto"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="10dp"
+        />
+    </RelativeLayout>
+
+</FrameLayout>
