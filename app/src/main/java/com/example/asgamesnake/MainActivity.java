@@ -14,7 +14,9 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(new GameView(this));
+        boolean isLightTheme=getIntent().getBooleanExtra("isLightTheme",false);
+        setContentView(new GameView(this,isLightTheme));
+
 
     }
 }

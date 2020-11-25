@@ -31,7 +31,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public static final int TOUCH_RIGHT=1;
     public static final int TOUCH_LEFT=2;
 
-    public GameView(Context context) {
+    public GameView(Context context, boolean isLightTheme) {
         super(context);
         getHolder().addCallback(this);
         thread=new MainThread(getHolder(),this);
@@ -39,12 +39,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         paint=new Paint();
 
+
         scoreText=new ScoreText(context);
         snakeSprite=new SnakeSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,1);
         foodSprite=new FoodSprite(screenWidth,screenHeight,zeroPointX,zeroPointY,snakeSprite,scoreText);
 
-        //Load Theme Settings
-        boolean isLightTheme=SettingsSingleton.getInstance().isLightTheme();
+//        //Load Theme Settings
+//        boolean isLightTheme=SettingsSingleton.getInstance(context).isLightTheme();
+
         if(isLightTheme)
         {
             canvasColor=Color.WHITE;

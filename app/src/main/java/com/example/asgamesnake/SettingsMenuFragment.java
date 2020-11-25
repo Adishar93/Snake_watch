@@ -46,7 +46,7 @@ public class SettingsMenuFragment extends Fragment {
         mBackButton=view.findViewById(R.id.bBack);
         setBackButtonOnClickListener();
 
-        boolean isLightTheme=SettingsSingleton.getInstance().isLightTheme();
+        boolean isLightTheme=SettingsSingleton.getInstance(mActivity.getApplicationContext()).isLightTheme();
 
         mLightThemeSwitch =view.findViewById(R.id.sbTheme);
         mLightThemeSwitch.setChecked(isLightTheme);
@@ -88,14 +88,14 @@ public class SettingsMenuFragment extends Fragment {
             {
                 if(isChecked)
                 {
-                    SettingsSingleton.getInstance().setLightTheme(true);
+                    SettingsSingleton.getInstance(mActivity.getApplicationContext()).setLightTheme(true);
 //                   mActivity.getMainRelativeLayout().setBackgroundColor(getResources().getColor(android.R.color.white));
 //                   mLightThemeSwitch.setTextColor(getResources().getColor(android.R.color.black));
 //                   mBackButton.setTextColor(getResources().getColor(android.R.color.black));
                 }
                 else
                 {
-                    SettingsSingleton.getInstance().setLightTheme(false);
+                    SettingsSingleton.getInstance(mActivity.getApplicationContext()).setLightTheme(false);
 //                    mActivity.getMainRelativeLayout().setBackgroundColor(getResources().getColor(android.R.color.black));
 //                    mLightThemeSwitch.setTextColor(getResources().getColor(android.R.color.white));
 //                    mBackButton.setTextColor(getResources().getColor(android.R.color.white));

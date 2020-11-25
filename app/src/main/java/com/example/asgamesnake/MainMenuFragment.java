@@ -30,6 +30,7 @@ public class MainMenuFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -40,13 +41,15 @@ public class MainMenuFragment extends Fragment {
 
         mFragmentRelativeLayout=view.findViewById(R.id.fragmentRelativeLayout);
 
+        boolean isLightTheme=SettingsSingleton.getInstance(getActivity().getApplicationContext()).isLightTheme();
+
         mPlayButton =view.findViewById(R.id.bPlay);
-        setPlayButtonOnClickListener();
+        setPlayButtonOnClickListener(isLightTheme);
 
         mSettingsButton=view.findViewById(R.id.bSettings);
         setSettingsButtonOnClickListener();
 
-        boolean isLightTheme=SettingsSingleton.getInstance().isLightTheme();
+
 
         if(isLightTheme)
         {
@@ -64,12 +67,13 @@ public class MainMenuFragment extends Fragment {
         return view;
     }
 
-    public void setPlayButtonOnClickListener()
+    public void setPlayButtonOnClickListener(final boolean isLightTheme)
     {
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(),MainActivity.class);
+                intent.putExtra("isLightTheme",isLightTheme);
                 startActivity(intent);
                 getActivity().finish();
             }

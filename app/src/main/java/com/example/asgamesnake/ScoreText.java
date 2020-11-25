@@ -22,7 +22,7 @@ public class ScoreText {
 
         highScore=localData.getLong("high score",0);
 
-        boolean isLightTheme=SettingsSingleton.getInstance().isLightTheme();
+        boolean isLightTheme=SettingsSingleton.getInstance(context).isLightTheme();
         if(isLightTheme)
         {
 
