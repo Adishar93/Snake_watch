@@ -241,4 +241,18 @@ public class SnakeSprite {
     public int getHeadY() {
         return headY;
     }
+
+    public boolean isFoodCoincidingWithSnakeBody(int x,int y)
+    {
+        for(int i=1;i<length;i++)
+        {
+            SnakeSegmentData ssd=snakeState.get(i);
+            if(x==ssd.getX()&&y==ssd.getY())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

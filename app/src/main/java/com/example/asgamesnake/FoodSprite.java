@@ -33,13 +33,26 @@ public class FoodSprite {
         {
 
             snakeSprite.setLength(snakeSprite.getLength()+1);
-            updatePositionXPositionY();
+
+            boolean foodCoincideInSnakeBody=true;
+            while(foodCoincideInSnakeBody)
+            {
+                updatePositionXPositionY();
+                foodCoincideInSnakeBody=snakeSprite.isFoodCoincidingWithSnakeBody(positionX,positionY);
+            }
+
         }
         else if((positionX==snakeSprite.getHeadX()&&positionY==snakeSprite.getHeadY()))
         {
             snakeSprite.setLength(snakeSprite.getLength()+1);
             scoreText.update(scoreText.getScore()+10);
-            updatePositionXPositionY();
+
+            boolean foodCoincideInSnakeBody=true;
+            while(foodCoincideInSnakeBody)
+            {
+                updatePositionXPositionY();
+                foodCoincideInSnakeBody=snakeSprite.isFoodCoincidingWithSnakeBody(positionX,positionY);
+            }
         }
 
     }
