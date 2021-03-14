@@ -1,5 +1,5 @@
-# AmazfitStratosTestApp
-Test App for Amazfit Stratos Android Watch
+# AmazfitVergeSnakeGame
+The classic snake game specifically desined for Amazfit Verge
 
 ## Interesting resources for Amazfit watches development:
 - https://github.com/KieronQuinn?tab=repositories
