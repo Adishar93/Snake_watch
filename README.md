@@ -1,4 +1,4 @@
-# AmazfitVergeSnakeGame
+# Amazfit Verge Snake Game
 The classic snake game specifically desined for Amazfit Verge
 
 ![screen1](https://user-images.githubusercontent.com/39119745/119235393-fa3c5300-bb4f-11eb-873b-73771ecfc459.png)
