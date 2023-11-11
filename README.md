@@ -1,5 +1,7 @@
 # Amazfit Verge Snake Game
 The classic snake game specifically desined for Amazfit Verge
+ ## Inspiration
+After acquiring the Amazfit Verge, I noticed the absence of a snake game for the watch. Motivated to fill this gap, I set out on the journey to create one from scratch.
 
 ![screen1](https://user-images.githubusercontent.com/39119745/119235393-fa3c5300-bb4f-11eb-873b-73771ecfc459.png)
 ![screen2](https://user-images.githubusercontent.com/39119745/119235401-fd374380-bb4f-11eb-97d2-13f3246a2792.png)
